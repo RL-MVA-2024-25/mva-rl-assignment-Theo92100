@@ -100,7 +100,7 @@ class ProjectAgent:
         zip_path = "fqi_model.joblib.zip"
         joblib_filename = "fqi_model.joblib"
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extract(joblib_filename, path=".")e
+            zip_ref.extract(joblib_filename, path=".")
         self.model = joblib.load(joblib_filename)
         self.nb_fit_calls = 1
 
