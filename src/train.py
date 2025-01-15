@@ -8,11 +8,11 @@ from sklearn.ensemble import RandomForestRegressor
 import zipfile
 
 
-
+# Theo92100 = Théo Niemann from the MVA
 class ProjectAgent:
     def __init__(self):
-        self.state_dim = 6 # env.observation_space.n
-        self.action_dim = 4 # env.action_space.n
+        self.state_dim = 6 
+        self.action_dim = 4 
         self.gamma = 0.90
         self.model=RandomForestRegressor()
         self.nb_fit_calls = 0
@@ -99,20 +99,13 @@ class ProjectAgent:
     def load(self):
         zip_path = "fqi_model.joblib.zip"
         joblib_filename = "fqi_model.joblib"
-
-        # Extract the .joblib file from the .zip
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            # This will extract fqi_model.joblib into the current directory
-            zip_ref.extract(joblib_filename, path=".")
-
-        # Load the model from the extracted .joblib file
+            zip_ref.extract(joblib_filename, path=".")e
         self.model = joblib.load(joblib_filename)
         self.nb_fit_calls = 1
 
         print(f"Model loaded from {zip_path} (extracted {joblib_filename}).")
 
-        # Optionally, remove the extracted file after loading if you don't need it
-        # os.remove(joblib_filename)
 
 
 if __name__ == "__main__":
@@ -121,16 +114,11 @@ if __name__ == "__main__":
         max_episode_steps=200
     )
 
-    # Instantiate our agent
+
     agent = ProjectAgent()
 
-    # Train the agent
+
     agent.train(env,12,5)
 
-    # Save the trained model
-    agent.save("fqi_model.joblib")
 
-    # Example usage: you can test that the agent loads correctly
-    # agent.load("fqi_model.joblib")
-    # obs, _ = env.reset()
-    # action = agent.act(obs)
+    agent.save("fqi_model.joblib")
